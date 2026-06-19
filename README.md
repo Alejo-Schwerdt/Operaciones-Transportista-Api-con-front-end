@@ -69,3 +69,4 @@ El acceso a la API está protegido con **Spring Security** y autenticación medi
 ## Estado del proyecto
 
 MVP funcional. El backend cuenta con las validaciones de negocio centrales implementadas (bloqueo de recursos en viaje, prohibición de editar viajes finalizados, cálculo automático de disponibilidad de camiones). El frontend cubre la gestión completa de camiones, camioneros y viajes, además de un panel principal con estadísticas generales.
+El archivo sql es para insertar en base de datos y hacer pruebas directamente
