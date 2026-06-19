@@ -1,0 +1,54 @@
+-- =========================================================
+-- DATOS DE PRUEBA - Sistema de Gestión Logística
+-- MySQL
+-- =========================================================
+-- Orden de carga: camiones y camioneros primero (no tienen
+-- dependencias), viajes al final (depende de los dos anteriores)
+-- =========================================================
+ 
+-- -------------------------
+-- CAMIONES
+-- -------------------------
+INSERT INTO camiones (patente, marca, modelo, anio, capacidad_toneladas, disponible, estado) VALUES
+('AB123CD', 'Scania', 'R450', 2019, 28.5, true, 'DISPONIBLE'),
+('AC456EF', 'Volvo', 'FH16', 2020, 30.0, true, 'DISPONIBLE'),
+('AD789GH', 'Mercedes-Benz', 'Actros', 2018, 26.0, false, 'EN_VIAJE'),
+('AE012IJ', 'Iveco', 'Stralis', 2021, 27.5, false, 'EN_VIAJE'),
+('AF345KL', 'Ford', 'Cargo 1722', 2017, 22.0, false, 'EN_TALLER'),
+('AG678MN', 'Scania', 'P360', 2022, 25.0, true, 'DISPONIBLE');
+ 
+-- -------------------------
+-- CAMIONEROS
+-- -------------------------
+INSERT INTO camioneros (nombre, apellido, dni, telefono, email, numero_licencia, habilitado) VALUES
+('Carlos', 'Gómez', '28456123', '2291-455123', 'carlos.gomez@mail.com', 'LIC-001234', true),
+('Lucas', 'Fernández', '30123456', '2291-455456', 'lucas.fernandez@mail.com', 'LIC-005678', true),
+('Martín', 'Pereyra', '25789456', '2291-455789', 'martin.pereyra@mail.com', 'LIC-009012', true),
+('Sergio', 'Díaz', '32456789', '2291-455321', 'sergio.diaz@mail.com', 'LIC-003456', false),
+('Pablo', 'Acosta', '29654123', '2291-455654', 'pablo.acosta@mail.com', 'LIC-007890', true);
+ 
+-- -------------------------
+-- VIAJES
+-- (camion_id y camionero_id según el orden de inserción arriba:
+--  camiones 1-6, camioneros 1-5)
+-- -------------------------
+ 
+-- Viaje FINALIZADO (con fecha de llegada) - usa camión 1 (hoy DISPONIBLE de nuevo)
+INSERT INTO viajes (origen, destino, distancia_km, fecha_salida, fecha_llegada, monto_flete, estado, camionero_id, camion_id) VALUES
+('Coronel Pringles', 'Buenos Aires', 520.0, '2026-06-10', '2026-06-11', 850000.0, 'FINALIZADO', 1, 1);
+ 
+-- Viaje EN_CURSO - usa camión 3 (EN_VIAJE, coherente con su estado actual)
+INSERT INTO viajes (origen, destino, distancia_km, fecha_salida, fecha_llegada, monto_flete, estado, camionero_id, camion_id) VALUES
+('Bahía Blanca', 'Neuquén', 610.0, '2026-06-17', NULL, 920000.0, 'EN_CURSO', 2, 3);
+ 
+-- Otro viaje EN_CURSO - usa camión 4 (EN_VIAJE, coherente con su estado actual)
+INSERT INTO viajes (origen, destino, distancia_km, fecha_salida, fecha_llegada, monto_flete, estado, camionero_id, camion_id) VALUES
+('Mar del Plata', 'Rosario', 700.0, '2026-06-16', NULL, 1050000.0, 'EN_CURSO', 3, 4);
+ 
+-- Viaje PENDIENTE - usa camión 2 (DISPONIBLE, todavía no asignado activamente)
+INSERT INTO viajes (origen, destino, distancia_km, fecha_salida, fecha_llegada, monto_flete, estado, camionero_id, camion_id) VALUES
+('La Plata', 'Córdoba', 680.0, '2026-06-20', NULL, 980000.0, 'PENDIENTE', 5, 2);
+ 
+-- Viaje CANCELADO - usa camión 6 (DISPONIBLE, el viaje no se realizó)
+INSERT INTO viajes (origen, destino, distancia_km, fecha_salida, fecha_llegada, monto_flete, estado, camionero_id, camion_id) VALUES
+('Tandil', 'Mendoza', 950.0, '2026-06-12', NULL, 1400000.0, 'CANCELADO', 1, 6);

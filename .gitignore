@@ -1,0 +1,29 @@
+# --- Generales ---
+.DS_Store
+.env*
+*.log
+.idea/
+.vscode/
+
+# --- Backend (Carpeta: operaciones) ---
+/operaciones/target/
+/operaciones/.gradle/
+/operaciones/build/
+/operaciones/.settings/
+/operaciones/.classpath
+/operaciones/.project
+/operaciones/*.iml
+/operaciones/.mvn/wrapper/maven-wrapper.jar
+/operaciones/src/main/resources/application.properties
+
+# --- Frontend (Carpeta: operaciones-frontend) ---
+/operaciones-frontend/node_modules/
+/operaciones-frontend/build/
+/operaciones-frontend/dist/
+/operaciones-frontend/.parcel-cache
+/operaciones-frontend/.output
+
+# --- IDEs ---
+.idea/
+.vscode/
+*.swp
